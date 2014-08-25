@@ -61,7 +61,7 @@ public class createAddress extends Activity implements View.OnClickListener
                         town.getText().toString().equals("") ||
                         street_code.getText().toString().equals(""))
                 {
-                    Toast.makeText(createAddress.this, "You mad bro", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(createAddress.this, "please fill in proper", Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -101,16 +101,11 @@ public class createAddress extends Activity implements View.OnClickListener
                                     build();
 
 
-
-
-
-
                             addressC.createAddress(address);
-                            Toast.makeText(createAddress.this, "create address pass", Toast.LENGTH_SHORT).show();
 
                         }
 
-                        Toast.makeText(createAddress.this, "made it to database", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(createAddress.this, "made it to database yall", Toast.LENGTH_SHORT).show();
 
                     }catch ( NumberFormatException nfe)
                     {
