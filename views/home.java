@@ -1,17 +1,19 @@
-package com.example.login;
+package com.example.login.views;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.login.R;
+import com.example.login.domain.Address;
 import com.example.login.domain.User;
 import com.example.login.repository.implementation.UserDAO;
-import com.example.login.repository.implementation.UserDAOImpl;
+import com.example.login.repository.implementation.impl.UserDAOImpl;
+
+import java.lang.reflect.Array;
 
 /**
  * Created by Common Sense on 8/15/2014.
@@ -22,8 +24,10 @@ public class home extends Activity implements View.OnClickListener{
     private TextView lastCon;
     private TextView cellCon;
 
-    private  String password = null;
+    //private  String password = null;
     private UserDAO userObj =  null;
+
+    private String[] details = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,17 +52,17 @@ public class home extends Activity implements View.OnClickListener{
         submit.setOnClickListener(this);
         nope.setOnClickListener(this);
 
-        String[] details = new String[5];
-        Bundle intent = getIntent().getExtras();
-        if(intent != null)
-        {
-            details = intent.getStringArray("arrayDetails");
-
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(), "The ship sank!", Toast.LENGTH_SHORT).show();
-        }
+//         details = new String[5];
+//        Bundle intent = getIntent().getExtras();
+//        if(intent != null)
+//        {
+//            details = intent.getStringArray("arrayDetails");
+//
+//        }
+//        else
+//        {
+//            Toast.makeText(getApplicationContext(), "The ship sank!", Toast.LENGTH_SHORT).show();
+//        }
 
 //         emailCon.setText(details.);
 //         usernameCon = (EditText) findViewById(R.id.etUserNameConfirm);
@@ -83,31 +87,38 @@ public class home extends Activity implements View.OnClickListener{
 switch (view.getId()) {
     case R.id.btnSingInConfirm:
 
-    String[] details = new String[5];
+     details = new String[5];
+        String[] de = new String[5];
+
     Bundle intent = getIntent().getExtras();
     if (intent != null) {
-        details = intent.getStringArray("arrayDetails");
+        de = intent.getStringArray("arrayDetails");
 
 
-        User user = new
-                User.Builder(
-                details[1].toString()).
-                password(details[0].toString()).
-                email(details[2].toString()).
-                surname(details[3].toString()).
-                cell(details[4].toString()).
-                build();
+//        User user = new
+//                User.Builder(
+//                details[1].toString()).
+//                password(details[0].toString()).
+//                email(details[2].toString()).
+//                surname(details[3].toString()).
+//                cell(details[4].toString()).
+//                build();
+//
+//        userObj.createUser(user);
+//        Toast.makeText(getApplicationContext(), "Date wrote to database!", Toast.LENGTH_SHORT).show();
 
-        userObj.createUser(user);
-        Toast.makeText(getApplicationContext(), "Date wrote to database!", Toast.LENGTH_SHORT).show();
+        Intent address = new Intent(home.this, createAddress.class);
+        address.putExtra("users", de);
 
+
+        startActivity(address);
 
     } else {
         Toast.makeText(getApplicationContext(), "The ship sank!", Toast.LENGTH_SHORT).show();
     }
         break;
     case R.id.btnNotConfirm:
-        Intent main = new Intent(home.this, main.class);
+        Intent main = new Intent(home.this, com.example.login.views.main.class);
         startActivity(main);
         break;
 
